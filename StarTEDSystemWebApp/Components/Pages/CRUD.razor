@@ -3,6 +3,25 @@
 <PageTitle>CRUD - StarTED</PageTitle>
 <h3>CRUD - StarTED</h3>
 
+@* Error Validation *@
+@if (errorList.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p class="mb-3">Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errorList)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+else if (feedback != null && feedback != "")
+{
+    <div class="alert alert-info">
+        @feedback
+    </div>
+}
 
 <div class="container border py-3">
     <div>
@@ -25,7 +44,7 @@
                     
                 }
                 <div id="menu-program-courses">
-                    <label class="" for="program-info">Program:</label>
+                    <label class="col-1" for="program-info">Program:</label>
                     <select class="form-select" id="program-info" @bind="ProgramId">
                         <option selected value="0">Select a Program</option>
                         @if (Programs != null)
@@ -40,23 +59,23 @@
 
 
                 <div>
-                    <label for="course-name">Course Name:</label>
+                    <label for="course-name" class="col-1">Course Name:</label>
                     <input id="course-name"  @bind="CourseName"/>
                 </div>
                 <div>
-                    <label for="course-credits">Credits:</label>
+                    <label for="course-credits" class="col-1">Credits:</label>
                     <input id="course-credits" @bind="Credits"/>
                 </div>
                 <div>
-                    <label for="total-hours">Total Hours:</label>
+                    <label for="total-hours" class="col-1">Total Hours:</label>
                     <input id="total-hours" @bind="TotalHours"/>
                 </div>
                 <div>
-                    <label for="term">Term:</label>
+                    <label for="term" class="col-1">Term:</label>
                     <input id="term" @bind="Term"/>
                 </div>
                 <div>
-                    <label for="tuition">Tuition:</label>
+                    <label for="tuition" class="col-1">Tuition:</label>
                     <input id="tuition" @bind="Tuition"/>
                 </div>
                 <div>
@@ -64,7 +83,7 @@
                     <textarea class="form-control" rows="3" id="course-description" @bind="Description"/>
                 </div>
                 <div>
-                    <label for="required">Required:</label>
+                    <label for="required" class="col-1">Required:</label>
                     <input type="checkbox" id="required" @bind="Required"/>
                 </div>
                 <div>
@@ -72,16 +91,16 @@
                     <textarea class="form-control" rows="3" id="comments" @bind="Comments"/>
                 </div>
                 <div>
-                    <label for="active">Active:</label>
+                    <label for="active" class="col-1">Active:</label>
                     <input type="checkbox" id="active" @bind="Active"/>
                 </div>
 
             </section>
 
-            <section>
-                <div id="menu-buttons" class="col-6">
+            <section class="d-flex">
+                <div id="menu-buttons" class="w-75 m-auto ">
                     <div>
-                        <button class="btn btn-primary">Add Course</button>
+                        <button class="btn btn-primary" @onclick="OnHandleAddCourse">Add Course</button>
                     </div>
                     <div>
                         <button class="btn btn-secondary">Edit Course</button>

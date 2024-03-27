@@ -1,9 +1,17 @@
 ﻿body {
 }
+
+.container {
+    margin-bottom: 4rem;
+}
 h3 {
     background: linear-gradient( 90deg, rgba(2, 0, 36, 1) 0%, rgba(68, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100% );
     color: white;
     padding: 1rem;
+}
+
+#main-menu {
+    margin-bottom: 1.5rem;
 }
 
 #main-menu div {
@@ -13,12 +21,11 @@ h3 {
 #menu-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 1rem;
-}
+   
+    }
 
 #menu-program-courses {
     display: flex;
-    gap: 1rem;
 }
 
 

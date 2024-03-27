@@ -79,7 +79,76 @@ namespace StarTEDSystemWebApp.Components.Pages
             });
         }
 
-        public void ClearFields()
+        private void OnHandleAddCourse()
+        {
+            ValidateFields();
+
+        }
+
+        private void ValidateFields()
+        {
+            if (ProgramId == 0)
+            {
+                feedback = "Please select a program";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (string.IsNullOrWhiteSpace(CourseName))
+            {
+                feedback = "Please provide a course name";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (Credits == 0)
+            {
+                feedback = "Please provide the credits for the course";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (TotalHours == 0)
+            {
+                feedback = "Please provide the total hours of the course";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (Term == 0)
+            {
+                feedback = "Please provide the term for the course";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (Tuition == 0)
+            {
+                feedback = "Please provide the tuition costs for the course";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (string.IsNullOrWhiteSpace(Description))
+            {
+                feedback = "Please provide a description for the course";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            if (Required == false)
+            {
+                feedback = "Please indicate if the course is required or not";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+            //if (string.IsNullOrWhiteSpace(Comments))
+            //{
+            //    feedback = "error";
+            //    errorList.Add($"Error: {errorList.Count + 1}" + feedback);
+            //}
+
+            if (Required == false)
+            {
+                feedback = "Please indicate if the course is active or not";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }
+
+        }
+        private void ClearFields()
         {
             //Select component
             ProgramCourses = null;
