@@ -1,0 +1,25 @@
+﻿body {
+}
+h3 {
+    background: linear-gradient( 90deg, rgba(2, 0, 36, 1) 0%, rgba(68, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100% );
+    color: white;
+    padding: 1rem;
+}
+
+#main-menu div {
+    margin-bottom: .5rem;
+}
+
+#menu-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+#menu-program-courses {
+    display: flex;
+    gap: 1rem;
+}
+
+
+

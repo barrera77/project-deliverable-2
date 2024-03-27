@@ -1,0 +1,102 @@
+﻿@page "/crud"
+
+<PageTitle>CRUD - StarTED</PageTitle>
+<h3>CRUD - StarTED</h3>
+
+
+<div class="container border py-3">
+    <div>
+        <fieldset>
+            <legend>Program Courses</legend>
+
+            <section id="main-menu" class="">
+                @* Display the programs *@
+
+                @if (Programs == null)
+                {
+                    <div id="menu-program-courses">
+                        <div>
+                            <p>Loading Programs. . .</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    
+                }
+                <div id="menu-program-courses">
+                    <label class="" for="program-info">Program:</label>
+                    <select class="form-select" id="program-info" @bind="ProgramId">
+                        <option selected value="0">Select a Program</option>
+                        @if (Programs != null)
+                        {
+                            foreach (var prog in Programs)
+                            {
+                                <option value="@prog.ProgramId">@prog.ProgramName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="course-name">Course Name:</label>
+                    <input id="course-name"  @bind="CourseName"/>
+                </div>
+                <div>
+                    <label for="course-credits">Credits:</label>
+                    <input id="course-credits" @bind="Credits"/>
+                </div>
+                <div>
+                    <label for="total-hours">Total Hours:</label>
+                    <input id="total-hours" @bind="TotalHours"/>
+                </div>
+                <div>
+                    <label for="term">Term:</label>
+                    <input id="term" @bind="Term"/>
+                </div>
+                <div>
+                    <label for="tuition">Tuition:</label>
+                    <input id="tuition" @bind="Tuition"/>
+                </div>
+                <div>
+                    <label for="course-description">Description:</label>
+                    <textarea class="form-control" rows="3" id="course-description" @bind="Description"/>
+                </div>
+                <div>
+                    <label for="required">Required:</label>
+                    <input type="checkbox" id="required" @bind="Required"/>
+                </div>
+                <div>
+                    <label for="comments">Comments:</label>
+                    <textarea class="form-control" rows="3" id="comments" @bind="Comments"/>
+                </div>
+                <div>
+                    <label for="active">Active:</label>
+                    <input type="checkbox" id="active" @bind="Active"/>
+                </div>
+
+            </section>
+
+            <section>
+                <div id="menu-buttons" class="col-6">
+                    <div>
+                        <button class="btn btn-primary">Add Course</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary">Edit Course</button>
+                    </div>
+                    <div>
+                       <button class="btn btn-danger">Delete Course</button>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-outline-primary" @onclick="ClearFields">Clear</button>
+                    </div>
+                </div>
+            </section>
+
+
+        </fieldset>
+    </div>
+</div>
