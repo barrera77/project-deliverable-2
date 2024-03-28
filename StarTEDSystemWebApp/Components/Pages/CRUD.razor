@@ -45,7 +45,7 @@ else if (feedback != null && feedback != "")
                 }
                 <div id="menu-program-courses">
                     <label class="col-2" for="program-info">Program:</label>
-                    <select class="form-select" id="program-info" @onchange="HandleSelectedProgram">
+                    <select class="form-select" id="program-info" value="@ProgramId" @onchange="HandleSelectedProgram">
                         <option selected value="0">Select a Program</option>
                         @if (Programs != null)
                         {
@@ -65,8 +65,8 @@ else if (feedback != null && feedback != "")
 
                 <div id="select-program-course">
                     <label for="course-name" class="col-2">Course:</label>
-                    <select class="form-select" id="course-name" @onchange="HandleSelectedCourse">
-                        <option selected value="0">Select a Course</option>
+                    <select class="form-select" id="course-name" value="@CourseId" @onchange="HandleSelectedCourse">
+                        <option selected value="">Select a Course</option>
                         @if (ProgramCourses != null)
                         {
                             foreach (var pc in ProgramCourses)

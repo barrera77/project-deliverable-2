@@ -31,44 +31,16 @@ namespace StarTEDSystemWebApp.Components.Pages
 
         [Parameter]
         public int ProgramId { get; set; }
-
-        //Course fields
+      
         [Parameter]
         public string CourseId { get; set; }
-
-        [Parameter]
-        public string CourseName { get; set; }
-
-        [Parameter]
-        public double Credits { get; set; }
-
-        [Parameter]
-        public int TotalHours { get; set; }
-
-        [Parameter]
-        public int ClassroomType { get; set; }
-
-        [Parameter]
-        public int Term { get; set;}
-
-        [Parameter]
-        public double Tuition { get; set; }
-
-        [Parameter]
-        public string? Description { get; set; }
+        
 
         //ProgramCourse fields
-        [Parameter]
         public bool Required { get; set; }
-        [Parameter]
         public string Comments { get; set; }
-
-        [Parameter]
-        public int SectionLimit { get; set; }       
-
-        [Parameter]
-        public bool Active { get; set; }     
-        
+        public int SectionLimit { get; set; } 
+        public bool Active { get; set; }           
 
 
         protected override Task OnInitializedAsync()
@@ -107,48 +79,6 @@ namespace StarTEDSystemWebApp.Components.Pages
         //TODO: revise error handling may not need all fields
         private void ValidateFields()
         {
-            if (ProgramId == 0)
-            {
-                feedback = "Please select a program";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (string.IsNullOrWhiteSpace(CourseName))
-            {
-                feedback = "Please provide a course name";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (Credits == 0)
-            {
-                feedback = "Please provide the credits for the course";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (TotalHours == 0)
-            {
-                feedback = "Please provide the total hours of the course";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (Term == 0)
-            {
-                feedback = "Please provide the term for the course";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (Tuition == 0)
-            {
-                feedback = "Please provide the tuition costs for the course";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
-            if (string.IsNullOrWhiteSpace(Description))
-            {
-                feedback = "Please provide a description for the course";
-                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
-            }
-
             if (Required == false)
             {
                 feedback = "Please indicate if the course is required or not";
@@ -174,13 +104,7 @@ namespace StarTEDSystemWebApp.Components.Pages
             CourseId = "";
 
             //Course Fields
-            CourseName = "";
-            Credits = 0;
-            TotalHours = 0;
-            ClassroomType = 0;
-            Term = 0;
-            Tuition = 0;
-            Description = "";
+            Course = new Course();
 
             //ProgramCourse Fields
             Required = false;
