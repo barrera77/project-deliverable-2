@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using StarTEDSystemDB.BLL;
 using StarTEDSystemDB.Entities;
-using System.Data.SqlTypes;
+
 
 namespace StarTEDSystemWebApp.Components.Pages
 {
@@ -22,11 +22,12 @@ namespace StarTEDSystemWebApp.Components.Pages
 
         //Required properties
         public List<StarTEDSystemDB.Entities.Program> Programs { get; set; }
+        public List<ProgramCourse> Courses { get; set; }
         public List<ProgramCourse> ProgramCourses { get; set; }
 
         public List<string> errorList = new List<string>();
         public string feedback { get; set; }
-
+        public Course Course { get; set; }
 
         [Parameter]
         public int ProgramId { get; set; }
@@ -54,7 +55,7 @@ namespace StarTEDSystemWebApp.Components.Pages
         public double Tuition { get; set; }
 
         [Parameter]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         //ProgramCourse fields
         [Parameter]
@@ -66,25 +67,44 @@ namespace StarTEDSystemWebApp.Components.Pages
         public int SectionLimit { get; set; }       
 
         [Parameter]
-        public bool Active { get; set; }
+        public bool Active { get; set; }     
+        
 
-       
 
         protected override Task OnInitializedAsync()
         {
             return Task.Run(() =>
             {
-                Programs = ProgramServices.GetAllPrograms();
-
+                Programs = ProgramServices.GetAllPrograms(); 
             });
         }
 
-        private void OnHandleAddCourse()
+        private void OnHandleAddProgramCourse()
         {
             ValidateFields();
-
         }
 
+        private async Task HandleSelectedProgram(ChangeEventArgs e)
+        {
+            ProgramId = Convert.ToInt32(e.Value);
+            if (ProgramId != 0)
+            {
+                ProgramCourses = ProgramCourseServices.GetAllProgramCourses(ProgramId);
+                await InvokeAsync(StateHasChanged);
+            }            
+        }
+
+        private async Task HandleSelectedCourse(ChangeEventArgs e)
+        {
+            CourseId = Convert.ToString(e.Value);
+            if (CourseId != "")
+            {
+                Course = CourseServices.GetCourseById(CourseId);
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+
+        //TODO: revise error handling may not need all fields
         private void ValidateFields()
         {
             if (ProgramId == 0)
@@ -146,12 +166,11 @@ namespace StarTEDSystemWebApp.Components.Pages
                 feedback = "Please indicate if the course is active or not";
                 errorList.Add($"Error {errorList.Count + 1}: " + feedback);
             }
-
         }
         private void ClearFields()
         {
             //Select component
-            ProgramCourses = null;
+            ProgramId = 0;
 
             //Course Fields
             CourseName = "";

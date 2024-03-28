@@ -45,62 +45,81 @@ else if (feedback != null && feedback != "")
                 }
                 <div id="menu-program-courses">
                     <label class="col-1" for="program-info">Program:</label>
-                    <select class="form-select" id="program-info" @bind="ProgramId">
-                        <option selected value="0">Select a Program</option>
+                    <select class="form-select" id="program-info" @onchange="HandleSelectedProgram">
+                        <option selected value="0" >Select a Program</option>
                         @if (Programs != null)
                         {
                             foreach (var prog in Programs)
                             {
                                 <option value="@prog.ProgramId">@prog.ProgramName</option>
+                            }                           
+                        }
+                        else
+                        {
+                            <div>
+                                No  cursos
+                            </div>
+                        }
+                    </select>
+                </div>
+
+                <div id="select-program-course">
+                    <label for="course-name" class="col-1">Course:</label>
+                    <select class="form-select" id="course-name" @onchange="HandleSelectedCourse">
+                        <option selected value="0" >Select a Course</option>
+                        @if (ProgramCourses != null)
+                        {
+                            foreach (var pc in ProgramCourses)
+                            {
+                                <option value="@pc.CourseId">@pc.Course.CourseName</option>
                             }
                         }
                     </select>
                 </div>
 
-
-                <div>
-                    <label for="course-name" class="col-1">Course Name:</label>
-                    <input id="course-name"  @bind="CourseName"/>
-                </div>
+                @if (Course != null)
+                {
                 <div>
                     <label for="course-credits" class="col-1">Credits:</label>
-                    <input id="course-credits" @bind="Credits"/>
+                    <input id="course-credits" @bind-value="Course.Credits"  />
                 </div>
                 <div>
                     <label for="total-hours" class="col-1">Total Hours:</label>
-                    <input id="total-hours" @bind="TotalHours"/>
+                        <input id="total-hours" @bind-value="Course.TotalHours" />
                 </div>
                 <div>
                     <label for="term" class="col-1">Term:</label>
-                    <input id="term" @bind="Term"/>
+                        <input id="term" @bind-value="Course.Term" />
                 </div>
                 <div>
                     <label for="tuition" class="col-1">Tuition:</label>
-                    <input id="tuition" @bind="Tuition"/>
+                        <input id="tuition" @bind-value="Course.Tuition"/>
                 </div>
                 <div>
                     <label for="course-description">Description:</label>
-                    <textarea class="form-control" rows="3" id="course-description" @bind="Description"/>
+                        <input class="form-control" rows="3" id="course-description" @bind-value="Course.Description"></input>
                 </div>
                 <div>
                     <label for="required" class="col-1">Required:</label>
-                    <input type="checkbox" id="required" @bind="Required"/>
+                    <input type="checkbox" id="required" @bind="Required" />
                 </div>
                 <div>
                     <label for="comments">Comments:</label>
-                    <textarea class="form-control" rows="3" id="comments" @bind="Comments"/>
+                    <textarea class="form-control" rows="3" id="comments" @bind="Comments" />
                 </div>
                 <div>
                     <label for="active" class="col-1">Active:</label>
-                    <input type="checkbox" id="active" @bind="Active"/>
+                    <input type="checkbox" id="active" @bind="Active" />
                 </div>
 
+                }
+                
             </section>
 
             <section class="d-flex">
                 <div id="menu-buttons" class="w-75 m-auto ">
                     <div>
-                        <button class="btn btn-primary" @onclick="OnHandleAddCourse">Add Course</button>
+                        <button class="btn btn-primary" @onclick="OnHandleAddProgramCourse">Add Course</button>
                     </div>
                     <div>
                         <button class="btn btn-secondary">Edit Course</button>

@@ -1,4 +1,5 @@
-﻿using StarTEDSystemDB.DAL;
+﻿using Microsoft.EntityFrameworkCore;
+using StarTEDSystemDB.DAL;
 using StarTEDSystemDB.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,12 @@ namespace StarTEDSystemDB.BLL
             _context = context;
         }
 
-        public List<Course>GetAllCourses()
+        public Course? GetCourseById(string id)
         {
-            return _context.Courses.ToList<Course>();
+            return _context.Courses
+                .Where(c => c.CourseId == id)
+                .FirstOrDefault();
         }
+
     }
 }

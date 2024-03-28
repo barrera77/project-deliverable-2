@@ -24,7 +24,7 @@ h3 {
    
     }
 
-#menu-program-courses {
+#menu-program-courses, #select-program-course {
     display: flex;
 }
 
