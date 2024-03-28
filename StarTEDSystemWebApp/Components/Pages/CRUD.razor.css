@@ -28,5 +28,9 @@ h3 {
     display: flex;
 }
 
+.col-2 {
+    width: 10%;
+}
+
 
 

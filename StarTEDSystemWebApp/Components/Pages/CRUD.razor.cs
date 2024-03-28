@@ -169,8 +169,9 @@ namespace StarTEDSystemWebApp.Components.Pages
         }
         private void ClearFields()
         {
-            //Select component
+            //Select components
             ProgramId = 0;
+            CourseId = "";
 
             //Course Fields
             CourseName = "";

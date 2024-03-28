@@ -44,9 +44,9 @@ else if (feedback != null && feedback != "")
                     
                 }
                 <div id="menu-program-courses">
-                    <label class="col-1" for="program-info">Program:</label>
+                    <label class="col-2" for="program-info">Program:</label>
                     <select class="form-select" id="program-info" @onchange="HandleSelectedProgram">
-                        <option selected value="0" >Select a Program</option>
+                        <option selected value="0">Select a Program</option>
                         @if (Programs != null)
                         {
                             foreach (var prog in Programs)
@@ -64,9 +64,9 @@ else if (feedback != null && feedback != "")
                 </div>
 
                 <div id="select-program-course">
-                    <label for="course-name" class="col-1">Course:</label>
+                    <label for="course-name" class="col-2">Course:</label>
                     <select class="form-select" id="course-name" @onchange="HandleSelectedCourse">
-                        <option selected value="0" >Select a Course</option>
+                        <option selected value="0">Select a Course</option>
                         @if (ProgramCourses != null)
                         {
                             foreach (var pc in ProgramCourses)
@@ -80,27 +80,31 @@ else if (feedback != null && feedback != "")
                 @if (Course != null)
                 {
                 <div>
-                    <label for="course-credits" class="col-1">Credits:</label>
-                    <input id="course-credits" @bind-value="Course.Credits"  />
+                    <label for="course-credits" class="col-2">Credits:</label>
+                    <input disabled="diabled" id="course-credits" @bind-value="Course.Credits"  />
                 </div>
                 <div>
-                    <label for="total-hours" class="col-1">Total Hours:</label>
-                        <input id="total-hours" @bind-value="Course.TotalHours" />
+                    <label for="total-hours" class="col-2">Total Hours:</label>
+                        <input disabled="diabled" id="total-hours" @bind-value="Course.TotalHours" />
+                </div>
+                    <div>
+                        <label for="classroom-type" class="col-2">Classroom Type:</label>
+                        <input disabled="diabled" id="classroom-type" @bind-value="Course.ClassroomType" />
+                    </div>
+                <div>
+                    <label for="term" class="col-2">Term:</label>
+                        <input disabled="diabled" id="term" @bind-value="Course.Term" />
                 </div>
                 <div>
-                    <label for="term" class="col-1">Term:</label>
-                        <input id="term" @bind-value="Course.Term" />
+                    <label for="tuition" class="col-2">Tuition:</label>
+                        <input disabled="diabled" id="tuition" @bind-value="Course.Tuition" />
                 </div>
                 <div>
-                    <label for="tuition" class="col-1">Tuition:</label>
-                        <input id="tuition" @bind-value="Course.Tuition"/>
+                        <label for="course-description" >Description:</label>
+                        <textarea disabled="diabled" class="form-control" rows="3" id="course-description"/>
                 </div>
                 <div>
-                    <label for="course-description">Description:</label>
-                        <input class="form-control" rows="3" id="course-description" @bind-value="Course.Description"></input>
-                </div>
-                <div>
-                    <label for="required" class="col-1">Required:</label>
+                    <label for="required" class="col-2">Required:</label>
                     <input type="checkbox" id="required" @bind="Required" />
                 </div>
                 <div>
@@ -108,7 +112,7 @@ else if (feedback != null && feedback != "")
                     <textarea class="form-control" rows="3" id="comments" @bind="Comments" />
                 </div>
                 <div>
-                    <label for="active" class="col-1">Active:</label>
+                    <label for="active" class="col-2">Active:</label>
                     <input type="checkbox" id="active" @bind="Active" />
                 </div>
 
