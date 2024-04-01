@@ -158,7 +158,9 @@ namespace StarTEDSystemWebApp.Components.Pages
 
         private void EditCourse()
         {           
-            ProgramCourseServices.UpdateProgramCourse(ProgramCourse.ProgramCourseId, ProgramCourse.Active);            
+            ProgramCourseServices.UpdateProgramCourse(ProgramCourse.ProgramCourseId, ProgramCourse.Active);
+            feedback = $"{ProgramCourse.Course.CourseName} **Active** status updated";
+
             ClearFields();
         }
 
