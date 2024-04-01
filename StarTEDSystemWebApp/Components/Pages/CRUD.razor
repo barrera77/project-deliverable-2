@@ -1,9 +1,9 @@
-﻿@page "/crud"
-
+﻿@page "/crud/{CourseId:int?}"
+@* 
 <PageTitle>CRUD - StarTED</PageTitle>
 <h3>CRUD - StarTED</h3>
 
-@* Error Validation *@
+
 @if (errorList.Count > 0)
 {
     <div class="alert alert-danger">
@@ -29,7 +29,7 @@ else if (feedback != null && feedback != "")
             <legend>Program Courses</legend>
 
             <section id="main-menu" class="">
-                @* Display the programs *@
+              
 
                 @if (Programs == null)
                 {
@@ -77,7 +77,7 @@ else if (feedback != null && feedback != "")
                     </select>
                 </div>
 
-                @if (Course != null)
+                @if (Course != null )
                 {
                 <div>
                     <label for="course-credits" class="col-2">Credits:</label>
@@ -98,25 +98,66 @@ else if (feedback != null && feedback != "")
                 <div>
                     <label for="tuition" class="col-2">Tuition:</label>
                         <input disabled="diabled" id="tuition" @bind-value="Course.Tuition" />
-                </div>
-                <div>
-                        <label for="course-description" >Description:</label>
-                        <textarea disabled="diabled" class="form-control" rows="3" id="course-description"/>
-                </div>
-                <div>
-                    <label for="required" class="col-2">Required:</label>
-                    <input type="checkbox" id="required" @bind="Required" />
-                </div>
-                <div>
-                    <label for="comments">Comments:</label>
-                    <textarea class="form-control" rows="3" id="comments" @bind="Comments" />
-                </div>
-                <div>
-                    <label for="active" class="col-2">Active:</label>
-                    <input type="checkbox" id="active" @bind="Active" />
-                </div>
+                    </div>
 
+                    <div>
+                        <label for="course-description">Description:</label>
+                        <textarea disabled="diabled" class="form-control" rows="3" id="course-description" />
+                    </div>
+                    <div>
+                        <label for="required" class="col-2">Required:</label>
+                        <input type="checkbox" id="required" checked />
+                    </div>
+                    <div>
+                        <label for="comments">Comments:</label>
+                        <textarea class="form-control" rows="3" id="comments" />
+                    </div>
+
+                    <div>
+                        <label for="active" class="col-2">Active:</label>
+                        <input type="checkbox" id="active" checked>
+                    </div>
                 }
+                else
+                {
+                    <div>
+                        <label for="course-credits" class="col-2">Credits:</label>
+                        <input disabled="diabled" id="course-credits"  />
+                    </div>
+                    <div>
+                        <label for="total-hours" class="col-2">Total Hours:</label>
+                        <input disabled="diabled" id="total-hours" />
+                    </div>
+                    <div>
+                        <label for="classroom-type" class="col-2">Classroom Type:</label>
+                        <input disabled="diabled" id="classroom-type"/>
+                    </div>
+                    <div>
+                        <label for="term" class="col-2">Term:</label>
+                        <input disabled="diabled" id="term"/>
+                    </div>
+                    <div>
+                        <label for="tuition" class="col-2">Tuition:</label>
+                        <input disabled="diabled" id="tuition"/>
+                    </div>
+                    <div>
+                        <label for="course-description">Description:</label>
+                        <textarea disabled="diabled" class="form-control" rows="3" id="course-description" />
+                    </div>
+                    <div>
+                        <label for="required" class="col-2">Required:</label>
+                        <input type="checkbox" id="required" />
+                    </div>
+                    <div>
+                        <label for="comments">Comments:</label>
+                        <textarea class="form-control" rows="3" id="comments"/>
+                    </div>
+                    <div>
+                        <label for="active" class="col-2">Active:</label>
+                        <input type="checkbox" id="active"/>
+                    </div>
+                }
+
                 
             </section>
 
@@ -130,6 +171,220 @@ else if (feedback != null && feedback != "")
                     </div>
                     <div>
                        <button class="btn btn-danger">Delete Course</button>
+                    </div>
+
+                    <div>
+                        <a href="/query" class="btn btn-outline-danger">Cancel</a>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-outline-primary" @onclick="ClearFields">Clear</button>
+                    </div>
+                </div>
+            </section>
+
+
+        </fieldset>
+    </div>
+</div>
+
+ *@
+
+<PageTitle>CRUD - StarTED</PageTitle>
+<h3>CRUD - StarTED</h3>
+
+@* Error Validation *@
+@if (errorList.Count > 0)
+{
+    <div class="alert alert-danger">
+        <p class="mb-3">Please fix the following issues:</p>
+        <ul>
+            @foreach (var error in errorList)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+else if (feedback != null && feedback != "")
+{
+    <div class="alert alert-info">
+        @feedback
+    </div>
+}
+
+<div class="container border py-3">
+    <div>
+        <fieldset>
+            <legend>Program Courses</legend>
+
+            <section id="main-menu" class="">
+                @* Display the programs *@
+
+                @if (Programs == null)
+                {
+                    <div id="menu-program-courses">
+                        <div>
+                            <p>Loading Programs. . .</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+                }
+                <div id="menu-program-courses">
+                    <label class="col-2" for="program-info">Program:</label>
+                    <select class="form-select" id="program-info" value="@ProgramId" @onchange="HandleSelectedProgram">
+                        <option selected value="0">Select a Program</option>
+                        @if (Programs != null)
+                        {
+                            foreach (var prog in Programs)
+                            {
+                                <option value="@prog.ProgramId">@prog.ProgramName</option>
+                            }
+                        }
+                        else
+                        {
+                            <div>
+                                No  cursos
+                            </div>
+                        }
+                    </select>
+                </div>
+
+                <div id="select-program-course">
+                    <label for="course-name" class="col-2">Course:</label>
+                    <select class="form-select" id="course-name" value="@CourseId" @onchange="HandleSelectedCourse">
+                        <option selected value="">Select a Course</option>
+                        @if (ProgramCourses != null)
+                        {
+                            foreach (var pc in ProgramCourses)
+                            {
+                                <option value="@pc.CourseId">@pc.Course.CourseName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                @if (ProgramCourse != null)
+                {
+                    <div>
+                        <label for="course-credits" class="col-2">Credits:</label>
+                        <input disabled="diabled" id="course-credits" @bind-value="ProgramCourse.Course.Credits" />
+                    </div>
+                    <div>
+                        <label for="total-hours" class="col-2">Total Hours:</label>
+                        <input disabled="diabled" id="total-hours" @bind-value="ProgramCourse.Course.TotalHours" />
+                    </div>
+                    <div>
+                        <label for="classroom-type" class="col-2">Classroom Type:</label>
+                        <input disabled="diabled" id="classroom-type" @bind-value="ProgramCourse.Course.ClassroomType" />
+                    </div>
+                    <div>
+                        <label for="term" class="col-2">Term:</label>
+                        <input disabled="diabled" id="term" @bind-value="ProgramCourse.Course.Term" />
+                    </div>
+                    <div>
+                        <label for="tuition" class="col-2">Tuition:</label>
+                        <input disabled="diabled" id="tuition" @bind-value="ProgramCourse.Course.Tuition" />
+                    </div>
+
+                    <div>
+                        <label for="course-description">Description:</label>
+                        <textarea disabled="diabled" class="form-control" rows="3" id="ProgramCourse.course-description" />
+                    </div>
+                    if ((ProgramCourse.Required != null) ? (bool)ProgramCourse.Required : true)
+                    {
+                        <div>
+                            <label for="required" class="col-2">Required:</label>
+                            <input type="checkbox" id="required" checked />
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <label for="required" class="col-2">Required:</label>
+                            <input type="checkbox" id="required"  />
+                        </div>
+                    }
+                    <div>
+                        <label for="comments">Comments:</label>
+                        <textarea class="form-control" rows="3" id="ProgramCourse.comments" />
+                    </div>
+
+                    if ((ProgramCourse.Active != null) ? (bool)ProgramCourse.Active : true)
+                    {
+                        <div>
+                            <label for="active" class="col-2">Active:</label>
+                            <input type="checkbox" id="active" checked>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <label for="active" class="col-2">Active:</label>
+                            <input type="checkbox" id="active">
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        <label for="course-credits" class="col-2">Credits:</label>
+                        <input disabled="diabled" id="course-credits" />
+                    </div>
+                    <div>
+                        <label for="total-hours" class="col-2">Total Hours:</label>
+                        <input disabled="diabled" id="total-hours" />
+                    </div>
+                    <div>
+                        <label for="classroom-type" class="col-2">Classroom Type:</label>
+                        <input disabled="diabled" id="classroom-type" />
+                    </div>
+                    <div>
+                        <label for="term" class="col-2">Term:</label>
+                        <input disabled="diabled" id="term" />
+                    </div>
+                    <div>
+                        <label for="tuition" class="col-2">Tuition:</label>
+                        <input disabled="diabled" id="tuition" />
+                    </div>
+                    <div>
+                        <label for="course-description">Description:</label>
+                        <textarea disabled="diabled" class="form-control" rows="3" id="course-description" />
+                    </div>
+                    <div>
+                        <label for="required" class="col-2">Required:</label>
+                        <input type="checkbox" id="required" />
+                    </div>
+                    <div>
+                        <label for="comments">Comments:</label>
+                        <textarea class="form-control" rows="3" id="comments" />
+                    </div>
+                    <div>
+                        <label for="active" class="col-2">Active:</label>
+                        <input type="checkbox" id="active" />
+                    </div>
+                }
+
+
+            </section>
+
+            <section class="d-flex">
+                <div id="menu-buttons" class="w-75 m-auto ">
+                    <div>
+                        <button class="btn btn-primary" @onclick="OnHandleAddProgramCourse">Add Course</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary">Edit Course</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger">Delete Course</button>
+                    </div>
+
+                    <div>
+                        <a href="/query" class="btn btn-outline-danger">Cancel</a>
                     </div>
 
                     <div>

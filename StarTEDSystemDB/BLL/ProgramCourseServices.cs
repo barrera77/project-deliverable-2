@@ -31,8 +31,19 @@ namespace StarTEDSystemDB.BLL
             return _context.ProgramCourses
                 .Where(c => c.CourseId == id)
                 .Include(c => c.Course)
+                .Include(p => p.Program)
                .OrderBy(c => c.Course.CourseName)
                .ToList();
         }
+
+        public ProgramCourse? GetProgramCourseById(string id)
+        {
+            return _context.ProgramCourses
+                .Where(c => c.CourseId == id)
+                .Include(c => c.Course)
+                .FirstOrDefault();
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
 using StarTEDSystemDB.BLL;
 using StarTEDSystemDB.Entities;
 
@@ -34,21 +35,34 @@ namespace StarTEDSystemWebApp.Components.Pages
       
         [Parameter]
         public string CourseId { get; set; }
-        
+        [Parameter]
+       public bool Required { get; set; }
+
+        [Parameter]
+        public bool Active { get; set; }
+
+
 
         //ProgramCourse fields
-        public bool Required { get; set; }
+
         public string Comments { get; set; }
         public int SectionLimit { get; set; } 
-        public bool Active { get; set; }           
+        public ProgramCourse ProgramCourse { get; set; }
 
 
         protected override Task OnInitializedAsync()
         {
-            return Task.Run(() =>
+            var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+
+            Programs = ProgramServices.GetAllPrograms();
+
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("CourseId", out var courseId))
             {
-                Programs = ProgramServices.GetAllPrograms(); 
-            });
+                //Course = CourseServices.GetCourseById(courseId);
+                ProgramCourse = ProgramCourseServices.GetProgramCourseById(courseId);
+            }
+
+            return Task.FromResult(true);
         }
 
         private void OnHandleAddProgramCourse()
@@ -71,7 +85,9 @@ namespace StarTEDSystemWebApp.Components.Pages
             CourseId = Convert.ToString(e.Value);
             if (CourseId != "")
             {
-                Course = CourseServices.GetCourseById(CourseId);
+                //Course = CourseServices.GetCourseById(CourseId);
+                ProgramCourse = ProgramCourseServices.GetProgramCourseById(CourseId);
+
                 await InvokeAsync(StateHasChanged);
             }
         }
@@ -79,21 +95,28 @@ namespace StarTEDSystemWebApp.Components.Pages
         //TODO: revise error handling may not need all fields
         private void ValidateFields()
         {
-            if (Required == false)
+            if (ProgramId == 0)
             {
-                feedback = "Please indicate if the course is required or not";
+                feedback = "Please select a program from the list";
                 errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+
             }
 
-            //if (string.IsNullOrWhiteSpace(Comments))
-            //{
-            //    feedback = "error";
-            //    errorList.Add($"Error: {errorList.Count + 1}" + feedback);
-            //}
+            if (string.IsNullOrWhiteSpace(CourseId))
+            {
+                feedback = "Please select a course from the list";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+
+            }
+            if (Required == false)
+            {
+                feedback = "Please indicate if the course is required";
+                errorList.Add($"Error {errorList.Count + 1}: " + feedback);
+            }           
 
             if (Required == false)
             {
-                feedback = "Please indicate if the course is active or not";
+                feedback = "Please indicate if the course should be active";
                 errorList.Add($"Error {errorList.Count + 1}: " + feedback);
             }
         }
@@ -112,5 +135,21 @@ namespace StarTEDSystemWebApp.Components.Pages
             SectionLimit = 0;
             Active = false;
         }
+
+        private void DeleteCourse()
+        {
+
+        }
+
+        private void EditCourse()
+        {
+
+        }
+
+        private void AddCourse()
+        {
+
+        }
+
     }
 }

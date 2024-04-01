@@ -1,4 +1,4 @@
-﻿@page "/query/{ProgramId:int?}"
+﻿@page "/query/{CourseId:int?}"
 
 <PageTitle>Query - StarTED</PageTitle>
 <h3>Query - StarTED</h3>
@@ -51,7 +51,7 @@
                             <button class="btn btn-primary" @onclick="HandleSelectedProgram">Show Program Courses</button>
                         </div>
                         <div>
-                            <a href="/crud" class="btn btn-outline-primary">Add New ...</a>
+                            <a href="/crud?CourseId" class="btn btn-outline-primary">Add New ...</a>
                         </div>
                     </div>
                 }                
@@ -78,7 +78,7 @@
                         @foreach (var pc in ProgramCourses)
                         {
                             <tr>
-                                <td class="text-center"><a href="/crud">Edit</a></td>
+                                <td class="text-center"><a href="/crud?CourseId=@pc.CourseId">Edit</a></td>
                                 <td class="text-center">@pc.CourseId</td>
                                 <td>@pc.Course.CourseName</td>
                                 <td class="text-center">@(pc.Required ? "Yes" : "No")</td>
