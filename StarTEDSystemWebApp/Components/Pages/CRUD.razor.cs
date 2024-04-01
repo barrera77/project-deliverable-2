@@ -35,8 +35,9 @@ namespace StarTEDSystemWebApp.Components.Pages
       
         [Parameter]
         public string CourseId { get; set; }
+        
         [Parameter]
-       public bool Required { get; set; }
+        public bool Required { get; set; }
 
         [Parameter]
         public bool Active { get; set; }
@@ -127,7 +128,17 @@ namespace StarTEDSystemWebApp.Components.Pages
             CourseId = "";
 
             //Course Fields
-            Course = new Course();
+            //ProgramCourse.Course.Credits = 0;
+            //ProgramCourse.Course.TotalHours = 0;
+            //ProgramCourse.Course.ClassroomType = 0;
+            //ProgramCourse.Course.Term = 0;
+            //ProgramCourse.Course.Tuition = 0;
+            //ProgramCourse.Required = false;
+            //ProgramCourse.Active = false;
+
+            ProgramCourse = null;
+            ProgramCourses = null;
+
 
             //ProgramCourse Fields
             Required = false;

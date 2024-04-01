@@ -17,6 +17,11 @@ namespace StarTEDSystemDB.BLL
             _context = context;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> list of courses associated with a specific program.</returns>
         public List<ProgramCourse> GetAllProgramCourses(int id)
         {
             return _context.ProgramCourses
@@ -26,6 +31,11 @@ namespace StarTEDSystemDB.BLL
                .ToList();
         }
 
+        /// <summary>
+        /// Get all Courses by Course ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>all ProgramCourses associated with a specific CourseId</returns>
         public List<ProgramCourse> GetAllCourses(string id)
         {
             return _context.ProgramCourses
@@ -36,6 +46,12 @@ namespace StarTEDSystemDB.BLL
                .ToList();
         }
 
+        /// <summary>
+        /// Get a single ProgramCourse by course ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>a single program associated with a given Id</returns>
+
         public ProgramCourse? GetProgramCourseById(string id)
         {
             return _context.ProgramCourses
@@ -43,7 +59,6 @@ namespace StarTEDSystemDB.BLL
                 .Include(c => c.Course)
                 .FirstOrDefault();
         }
-
 
     }
 }
