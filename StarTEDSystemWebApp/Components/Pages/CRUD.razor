@@ -333,7 +333,7 @@ else if (feedback != null && feedback != "")
                         <label for="course-description">Description:</label>
                         <textarea disabled="diabled" class="form-control" rows="3" id="course-description" />
                     </div>
-                    if ((ProgramCourse.Required != null) ? (bool)ProgramCourse.Required : true)
+                    if (ProgramCourse.Required == true)
                     {
                         <div>
                             <label for="required" class="col-2">Required:</label>
@@ -352,18 +352,18 @@ else if (feedback != null && feedback != "")
                         <textarea class="form-control" rows="3" id="ProgramCourse.comments" />
                     </div>
 
-                    if ((ProgramCourse.Active != null) ? (bool)ProgramCourse.Active : true)
+                    if (ProgramCourse.Active == true)
                     {
                         <div>
                             <label for="active" class="col-2">Active:</label>
-                            <input type="checkbox" id="active" checked>
+                            <input type="checkbox" checked id="active" @onchange="OnHandleActiveChange">
                         </div>
                     }
                     else
                     {
                         <div>
                             <label for="active" class="col-2">Active:</label>
-                            <input type="checkbox" id="active">
+                            <input type="checkbox" id="active" @onchange="OnHandleActiveChange">
                         </div>
                     }
                 }
@@ -377,7 +377,7 @@ else if (feedback != null && feedback != "")
                         <button class="btn btn-primary" @onclick="OnHandleAddProgramCourse">Add Course</button>
                     </div>
                     <div>
-                        <button class="btn btn-secondary">Edit Course</button>
+                        <button class="btn btn-secondary" @onclick="EditCourse">Edit Course</button>
                     </div>
                     <div>
                         <button class="btn btn-danger">Delete Course</button>

@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarTEDSystemDB.DAL;
 using StarTEDSystemDB.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 
 namespace StarTEDSystemDB.BLL
@@ -60,5 +57,18 @@ namespace StarTEDSystemDB.BLL
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Update the ProgramCourse Active status associated with a given Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isActive"></param>
+        public void UpdateProgramCourse(int id, bool isActive)
+        {
+            ProgramCourse UpdatedProgramCourse = _context.ProgramCourses
+                .FirstOrDefault(pc => pc.ProgramCourseId == id);
+            UpdatedProgramCourse.Active = isActive;
+
+            _context.SaveChanges();
+        }
     }
 }

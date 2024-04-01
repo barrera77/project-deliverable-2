@@ -151,10 +151,15 @@ namespace StarTEDSystemWebApp.Components.Pages
         {
 
         }
+        private void OnHandleActiveChange(ChangeEventArgs e)
+        {
+            ProgramCourse.Active = Convert.ToBoolean(e.Value);
+        }
 
         private void EditCourse()
-        {
-
+        {           
+            ProgramCourseServices.UpdateProgramCourse(ProgramCourse.ProgramCourseId, ProgramCourse.Active);            
+            ClearFields();
         }
 
         private void AddCourse()
